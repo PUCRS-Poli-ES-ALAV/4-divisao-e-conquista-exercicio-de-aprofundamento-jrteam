@@ -8,12 +8,17 @@ import java.util.Arrays ;
  */
 public class App 
 {
+    public static int cont1;
+    public static int cont2;
+
     public static void main (String [] args){
-        int [] vet = geraVetor(4, 5);
-        int [] vetord = mergeSort(vet);
-        for (int i = 0; i < vetord.length; i++) {
-            System.out.print(vetord[i] +", " );
-        }
+        int [] vet = geraVetor(2500, 2500);
+        int a = maxVal1(vet, vet.length - 1);
+        int b = maxVal2(vet, 0, vet.length - 1);
+        
+        System.out.println("ops 1: " + cont1);
+        System.out.println("ops 2: " + cont2);
+        
     }
 
     public static int[] mergeSort(int[] desord){
@@ -45,6 +50,31 @@ public class App
         }
         return ord;
     }
+
+    public static int maxVal1(int A[], int n) {  
+        int max = A[0];
+        for (int i = 1; i < n; i++) {  
+            if( A[i] > max ) 
+               max = A[i];
+            cont1++;
+        }
+        return max;
+    }
+
+    public static int maxVal2(int A[], int init, int end) {  
+        if (end - init <= 1){
+            cont2++;
+            return max(A[init], A[end]);  
+        }
+        else {
+              int m = (init + end)/2;
+              cont2++;
+              int v1 = maxVal2(A,init,m);   
+              int v2 = maxVal2(A,m+1,end);  
+              return max(v1,v2);
+             }
+    }
+
     private static int[] geraVetor(int nroPares, int nroImpares){
         int [] res = null;
         int contPar = 0, contImpar = 0, novoNum;
@@ -73,4 +103,8 @@ public class App
         return res;
     }
 
+    public static int max(int a, int b){
+        if(a>b){ return a;}
+        else{ return b;}
+    }
 }
